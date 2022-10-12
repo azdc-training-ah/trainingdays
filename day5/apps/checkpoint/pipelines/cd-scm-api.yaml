@@ -2,7 +2,7 @@ pr: none
 trigger:
   branches:
     include:
-      - master
+      - main
   paths:
     include:
       - day4/apps/dotnetcore/Scm/*

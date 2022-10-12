@@ -2,7 +2,7 @@ pr: none
 trigger:
   branches:
     include:
-      - master
+      - main
   paths:
     include:
       - day3/apps/infrastructure/templates/scm-common.json
@@ -36,7 +36,7 @@ stages:
   - stage: Test
     displayName: Test
     dependsOn: Development
-    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/master'))
+    condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
 
     jobs:
       - template: jobs/deploy-scm-common.yaml

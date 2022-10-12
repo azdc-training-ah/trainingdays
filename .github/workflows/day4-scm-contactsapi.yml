@@ -3,14 +3,14 @@ name: day4-scm-contactsapi
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - day4/apps/infrastructure/bicep/contacts/**
       - day4/apps/dotnetcore/scm/**
       - .github/workflows/day4-scm-contactsapi.yml
   pull_request:
     branches:
-      - master
+      - main
     paths:
       - day4/apps/infrastructure/bicep/contacts/**
       - day4/apps/dotnetcore/scm/**
@@ -19,16 +19,16 @@ on:
   workflow_dispatch:
 
 env:
-  API_PACKAGE_NAME: "scmcontactsapi.zip"
-  BICEP_FILE_NAME: "contactsmain.bicep"
+  API_PACKAGE_NAME: 'scmcontactsapi.zip'
+  BICEP_FILE_NAME: 'contactsmain.bicep'
 
 jobs:
   build-api:
     if: github.repository == 'azuredevcollege/trainingdays'
     runs-on: ubuntu-latest
     env:
-      API_PACKAGE_PATH: "publish/scmcontactsapi"
-      API_PROJECT_PATH: "./day4/apps/dotnetcore/Scm/Adc.Scm.Api"
+      API_PACKAGE_PATH: 'publish/scmcontactsapi'
+      API_PROJECT_PATH: './day4/apps/dotnetcore/Scm/Adc.Scm.Api'
       NEED_DEPLOY: ${{ (github.event_name == 'push') || (github.event_name == 'workflow_dispatch') }}
 
     steps:
@@ -43,7 +43,7 @@ jobs:
       - name: Use Cache
         uses: actions/cache@v2
         with:
-          path: "~/.nuget/packages"
+          path: '~/.nuget/packages'
           key: ${{ runner.os }}-nuget-${{ hashFiles('./day4/apps/dotnetcore/Scm/Adc.Scm.Api/packages.lock.json') }}
 
       - name: Build and publish SCM ContactsAPI
@@ -63,7 +63,7 @@ jobs:
         if: env.NEED_DEPLOY == 'true'
         with:
           name: drop
-          path: "${{ env.API_PROJECT_PATH }}/${{ env.API_PACKAGE_PATH }}/${{ env.API_PACKAGE_NAME }}"
+          path: '${{ env.API_PROJECT_PATH }}/${{ env.API_PACKAGE_PATH }}/${{ env.API_PACKAGE_NAME }}'
           if-no-files-found: error
           retention-days: 30
 
@@ -71,8 +71,8 @@ jobs:
     if: github.repository == 'azuredevcollege/trainingdays'
     runs-on: ubuntu-latest
     env:
-      BICEP_MODULE_PATH: "./day4/apps/infrastructure/bicep/contacts/"
-      BICEP_FILE_PATH: "./day4/apps/infrastructure/bicep/contacts/contactsmain.bicep"
+      BICEP_MODULE_PATH: './day4/apps/infrastructure/bicep/contacts/'
+      BICEP_FILE_PATH: './day4/apps/infrastructure/bicep/contacts/contactsmain.bicep'
       NEED_DEPLOY: ${{ (github.event_name == 'push') || (github.event_name == 'workflow_dispatch') }}
 
     steps:

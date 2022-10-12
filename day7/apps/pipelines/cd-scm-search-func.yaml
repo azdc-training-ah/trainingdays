@@ -2,7 +2,7 @@ pr: none
 trigger:
   branches:
     include:
-      - master
+      - main
   paths:
     include:
       - day7/apps/dotnetcore/Scm.Search/Adc.Scm.Search.Indexer/*
