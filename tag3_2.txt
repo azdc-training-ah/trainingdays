@@ -1,0 +1,33 @@
+Create a single SQL Database
+
+az group create --name adc-sql-db-rg --location westeurope
+
+az sql server create --name sqlserverah2022 --resource-group adc-sql-db-rg --location westeurope --admin-user sqladminah --admin-password sQlAd_Ah2o22§
+
+
+az sql server firewall-rule create --server sqlserverah2022 --resource-group adc-sql-db-rg --name AllowYourIp --start-ip-address <your public ip> --end-ip-address <your public Ip>
+
+
+https://www.ipify.org/
+
+
+az sql db create --name MSFTEmployees --resource-group adc-sql-db-rg --server sqlserverah2022 --edition GeneralPurpose --family Gen5 --capacity 2 --max-size 32GB --zone-redundant false
+
+
+
+az sql server list --resource-group adc-sql-db-rg
+az sql db list --resource-group adc-sql-db-rg --server sqlserverah2022
+
+
+az sql db list --resource-group adc-sql-db-rg --server sqlserverah2022 --query '[].{Name: name}'
+az sql db show --resource-group adc-sql-db-rg --server sqlserverah2022 --name MSFTEmployees --query '{Name: name, maxSizeBytes: maxSizeBytes, status: status}'
+
+
+Connect to your SQL DB
+
+az sql db show-connection-string --name MSFTEmployees --server sqlserverah2022 --client sqlcmd
+
+"sqlcmd -S tcp:sqlserverah2022.database.windows.net,1433 -d MSFTEmployees -U <username> -P <password> -N -l 30"
+
+sqlcmd -S tcp:sqlserverah2022.database.windows.net,1433 -d MSFTEmployees -U sqladminah -P sQlAd_Ah2o22§ -N -l 30
+

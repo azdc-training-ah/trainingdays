@@ -1,0 +1,30 @@
+https://teams.microsoft.com/_?tenantId=72f988bf-86f1-41af-91ab-2d7cd011db47#/modern-calling/
+
+
+
+
+df52cdd3-d4f4-4592-ac4e-e146328dd9f0
+
+az webapp config appsettings set --settings APPINSIGHTS_INSTRUMENTATIONKEY=df52cdd3-d4f4-4592-ac4e-e146328dd9f0 -n myFirstWebAppDevCollegeAH -g myFirstWebApps-rg
+
+[
+  {
+    "name": "WEBSITE_NODE_DEFAULT_VERSION",
+    "slotSetting": false,
+    "value": "~14"
+  },
+  {
+    "name": "APPINSIGHTS_INSTRUMENTATIONKEY",
+    "slotSetting": false,
+    "value": "df52cdd3-d4f4-4592-ac4e-e146328dd9f0"
+  }
+]
+
+
+
+
+az webapp up --sku F1 --name myFirstWebAppDevCollegeAH --os-type Windows
+
+
+
+{"code":"InvalidTemplateDeployment","message":"The template deployment 'CreateVm-microsoftvisualstudio.visualstudio2022-v-20221010162637' is not valid according to the validation procedure. The tracking id is '2f215ad2-0cf3-49ef-9f72-2b47992225be'. See inner errors for details.","details":[{"code":"InvalidParameter","target":"imageReference","message":"The following list of images referenced from the deployment template are not found: Publisher: microsoftvisualstudio, Offer: visualstudio2022, Sku: vs-2022-ent-latest-win11-n-gen2, Version: latest. Please refer to https://docs.microsoft.com/en-us/azure/virtual-machines/windows/cli-ps-findimage for instructions on finding available images."}]}
