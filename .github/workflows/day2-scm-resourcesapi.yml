@@ -3,7 +3,7 @@ name: day2-scm-resourcesapi
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - day2/apps/infrastructure/bicep/scm-resourcesapi.bicep
       - day2/apps/dotnetcore/Scm.Resources/**
@@ -11,7 +11,7 @@ on:
 
   pull_request:
     branches:
-      - master
+      - main
     paths:
       - day2/apps/infrastructure/bicep/scm-resourcesapi.bicep
       - day2/apps/dotnetcore/Scm.Resources/**
@@ -20,17 +20,17 @@ on:
   workflow_dispatch:
 
 env:
-  API_PACKAGE_NAME: "scmresourcesapi.zip"
-  RESIZER_PACKAGE_NAME: "resizer.zip"
-  BICEP_FILE_NAME: "scm-resourcesapi.bicep"
+  API_PACKAGE_NAME: 'scmresourcesapi.zip'
+  RESIZER_PACKAGE_NAME: 'resizer.zip'
+  BICEP_FILE_NAME: 'scm-resourcesapi.bicep'
 
 jobs:
   build-api:
     if: github.repository == 'azuredevcollege/trainingdays'
     runs-on: ubuntu-latest
     env:
-      API_PACKAGE_PATH: "publish/scmresourcesapi"
-      API_PROJECT_PATH: "./day2/apps/dotnetcore/Scm.Resources/Adc.Scm.Resources.Api"
+      API_PACKAGE_PATH: 'publish/scmresourcesapi'
+      API_PROJECT_PATH: './day2/apps/dotnetcore/Scm.Resources/Adc.Scm.Resources.Api'
       NEED_DEPLOY: ${{ (github.event_name == 'push') || (github.event_name == 'workflow_dispatch') }}
 
     steps:
@@ -59,7 +59,7 @@ jobs:
         if: env.NEED_DEPLOY == 'true'
         with:
           name: drop
-          path: "${{ env.API_PROJECT_PATH }}/${{ env.API_PACKAGE_PATH }}/${{ env.API_PACKAGE_NAME }}"
+          path: '${{ env.API_PROJECT_PATH }}/${{ env.API_PACKAGE_PATH }}/${{ env.API_PACKAGE_NAME }}'
           if-no-files-found: error
           retention-days: 30
 
@@ -67,8 +67,8 @@ jobs:
     if: github.repository == 'azuredevcollege/trainingdays'
     runs-on: ubuntu-latest
     env:
-      RESIZER_PACKAGE_PATH: "publish/resizer"
-      RESIZER_PROJECT_PATH: "./day2/apps/dotnetcore/Scm.Resources/Adc.Scm.Resources.ImageResizer"
+      RESIZER_PACKAGE_PATH: 'publish/resizer'
+      RESIZER_PROJECT_PATH: './day2/apps/dotnetcore/Scm.Resources/Adc.Scm.Resources.ImageResizer'
       NEED_DEPLOY: ${{ (github.event_name == 'push') || (github.event_name == 'workflow_dispatch') }}
 
     steps:
@@ -97,7 +97,7 @@ jobs:
         if: env.NEED_DEPLOY == 'true'
         with:
           name: drop
-          path: "${{ env.RESIZER_PROJECT_PATH }}/${{ env.RESIZER_PACKAGE_PATH }}/${{ env.RESIZER_PACKAGE_NAME }}"
+          path: '${{ env.RESIZER_PROJECT_PATH }}/${{ env.RESIZER_PACKAGE_PATH }}/${{ env.RESIZER_PACKAGE_NAME }}'
           if-no-files-found: error
           retention-days: 30
 
@@ -105,7 +105,7 @@ jobs:
     if: github.repository == 'azuredevcollege/trainingdays'
     runs-on: ubuntu-latest
     env:
-      BICEP_FILE_PATH: "./day2/apps/infrastructure/bicep/scm-resourcesapi.bicep"
+      BICEP_FILE_PATH: './day2/apps/infrastructure/bicep/scm-resourcesapi.bicep'
       NEED_DEPLOY: ${{ (github.event_name == 'push') || (github.event_name == 'workflow_dispatch') }}
 
     steps:

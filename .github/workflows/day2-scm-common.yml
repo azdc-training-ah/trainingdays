@@ -3,13 +3,13 @@ name: day2-scm-common
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - day2/apps/infrastructure/bicep/scm-common.bicep
       - .github/workflows/day2-scm-common.yml
   pull_request:
     branches:
-      - master
+      - main
     paths:
       - day2/apps/infrastructure/bicep/scm-common.bicep
       - .github/workflows/day2-scm-common.yml
@@ -17,14 +17,14 @@ on:
   workflow_dispatch:
 
 env:
-  BICEP_FILE_NAME: "scm-common.bicep"
+  BICEP_FILE_NAME: 'scm-common.bicep'
 
 jobs:
   build:
     if: github.repository == 'azuredevcollege/trainingdays'
     runs-on: ubuntu-latest
     env:
-      BICEP_FILE_PATH: "./day2/apps/infrastructure/bicep/scm-common.bicep"
+      BICEP_FILE_PATH: './day2/apps/infrastructure/bicep/scm-common.bicep'
       NEED_DEPLOY: ${{ (github.event_name == 'push') || (github.event_name == 'workflow_dispatch') }}
 
     steps:
