@@ -3,7 +3,7 @@ name: day4-scm-fe
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - day4/apps/infrastructure/bicep/frontend/**
       - day4/apps/frontend/scmfe/**
@@ -11,7 +11,7 @@ on:
 
   pull_request:
     branches:
-      - master
+      - main
     paths:
       - day4/apps/infrastructure/bicep/frontend/**
       - day4/apps/frontend/scmfe/**
@@ -20,15 +20,15 @@ on:
   workflow_dispatch:
 
 env:
-  BICEP_FILE_NAME: "frontendmain.bicep"
+  BICEP_FILE_NAME: 'frontendmain.bicep'
 
 jobs:
   build-bicep:
     if: github.repository == 'azuredevcollege/trainingdays'
     runs-on: ubuntu-latest
     env:
-      BICEP_FILE_PATH: "./day4/apps/infrastructure/bicep/frontend/frontendmain.bicep"
-      BICEP_MODULE_PATH: "./day4/apps/infrastructure/bicep/frontend/"
+      BICEP_FILE_PATH: './day4/apps/infrastructure/bicep/frontend/frontendmain.bicep'
+      BICEP_MODULE_PATH: './day4/apps/infrastructure/bicep/frontend/'
       NEED_DEPLOY: ${{ (github.event_name == 'push') || (github.event_name == 'workflow_dispatch') }}
 
     steps:
@@ -51,9 +51,9 @@ jobs:
     if: github.repository == 'azuredevcollege/trainingdays'
     runs-on: ubuntu-latest
     env:
-      FRONTEND_PROJECT_PATH: "./day4/apps/frontend/scmfe"
-      FRONTEND_DIST_PATH: "./day4/apps/frontend/scmfe/dist/"
-      NODE_VERSION: "14.x"
+      FRONTEND_PROJECT_PATH: './day4/apps/frontend/scmfe'
+      FRONTEND_DIST_PATH: './day4/apps/frontend/scmfe/dist/'
+      NODE_VERSION: '14.x'
       NEED_DEPLOY: ${{ (github.event_name == 'push') || (github.event_name == 'workflow_dispatch') }}
 
     steps:

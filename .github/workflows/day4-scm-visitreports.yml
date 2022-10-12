@@ -3,7 +3,7 @@ name: day4-scm-vistreportsapi
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - day4/apps/infrastructure/bicep/visitreports/**
       - day4/apps/nodejs/visitreport/**
@@ -12,7 +12,7 @@ on:
 
   pull_request:
     branches:
-      - master
+      - main
     paths:
       - day4/apps/infrastructure/bicep/visitreports/**
       - day4/apps/nodejs/visitreport/**
@@ -22,17 +22,17 @@ on:
   workflow_dispatch:
 
 env:
-  API_PACKAGE_NAME: "scmvisitreportsapi.zip"
-  TA_PACKAGE_NAME: "textanalytics.zip"
-  BICEP_FILE_NAME: "visitreportsmain.bicep"
+  API_PACKAGE_NAME: 'scmvisitreportsapi.zip'
+  TA_PACKAGE_NAME: 'textanalytics.zip'
+  BICEP_FILE_NAME: 'visitreportsmain.bicep'
 
 jobs:
   build-bicep:
     if: github.repository == 'azuredevcollege/trainingdays'
     runs-on: ubuntu-latest
     env:
-      BICEP_FILE_PATH: "./day4/apps/infrastructure/bicep/visitreports/visitreportsmain.bicep"
-      BICEP_MODULE_PATH: "./day4/apps/infrastructure/bicep/visitreports/"
+      BICEP_FILE_PATH: './day4/apps/infrastructure/bicep/visitreports/visitreportsmain.bicep'
+      BICEP_MODULE_PATH: './day4/apps/infrastructure/bicep/visitreports/'
       NEED_DEPLOY: ${{ (github.event_name == 'push') || (github.event_name == 'workflow_dispatch') }}
 
     steps:
@@ -55,8 +55,8 @@ jobs:
     if: github.repository == 'azuredevcollege/trainingdays'
     runs-on: ubuntu-latest
     env:
-      API_PROJECT_PATH: "./day4/apps/nodejs/visitreport"
-      NODE_VERSION: "12.x"
+      API_PROJECT_PATH: './day4/apps/nodejs/visitreport'
+      NODE_VERSION: '12.x'
       NEED_DEPLOY: ${{ (github.event_name == 'push') || (github.event_name == 'workflow_dispatch') }}
 
     steps:
@@ -89,7 +89,7 @@ jobs:
         if: env.NEED_DEPLOY == 'true'
         with:
           name: drop
-          path: "${{ env.API_PROJECT_PATH }}/${{ env.API_PACKAGE_NAME }}"
+          path: '${{ env.API_PROJECT_PATH }}/${{ env.API_PACKAGE_NAME }}'
           if-no-files-found: error
           retention-days: 30
 
@@ -97,8 +97,8 @@ jobs:
     if: github.repository == 'azuredevcollege/trainingdays'
     runs-on: ubuntu-latest
     env:
-      TA_PROJECT_PATH: "./day4/apps/nodejs/textanalytics"
-      NODE_VERSION: "12.x"
+      TA_PROJECT_PATH: './day4/apps/nodejs/textanalytics'
+      NODE_VERSION: '12.x'
       NEED_DEPLOY: ${{ (github.event_name == 'push') || (github.event_name == 'workflow_dispatch') }}
 
     steps:
@@ -133,7 +133,7 @@ jobs:
         if: env.NEED_DEPLOY == 'true'
         with:
           name: drop
-          path: "${{ env.TA_PROJECT_PATH }}/${{ env.TA_PACKAGE_NAME }}"
+          path: '${{ env.TA_PROJECT_PATH }}/${{ env.TA_PACKAGE_NAME }}'
           if-no-files-found: error
           retention-days: 30
 

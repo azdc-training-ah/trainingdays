@@ -3,14 +3,14 @@ name: day2-scm-contactsapi
 on:
   push:
     branches:
-      - master
+      - main
     paths:
       - day2/apps/infrastructure/bicep/scm-contactsapi.bicep
       - day2/apps/dotnetcore/scm/**
       - .github/workflows/day2-scm-contactsapi.yml
   pull_request:
     branches:
-      - master
+      - main
     paths:
       - day2/apps/infrastructure/bicep/scm-contactsapi.bicep
       - day2/apps/dotnetcore/scm/**
@@ -19,15 +19,15 @@ on:
   workflow_dispatch:
 
 env:
-  API_PACKAGE_NAME: "scmcontactsapi.zip"
-  BICEP_FILE_NAME: "scm-contactsapi.bicep"
+  API_PACKAGE_NAME: 'scmcontactsapi.zip'
+  BICEP_FILE_NAME: 'scm-contactsapi.bicep'
 
 jobs:
   build-bicep:
     if: github.repository == 'azuredevcollege/trainingdays'
     runs-on: ubuntu-latest
     env:
-      BICEP_FILE_PATH: "./day2/apps/infrastructure/bicep/scm-contactsapi.bicep"
+      BICEP_FILE_PATH: './day2/apps/infrastructure/bicep/scm-contactsapi.bicep'
       NEED_DEPLOY: ${{ (github.event_name == 'push') || (github.event_name == 'workflow_dispatch') }}
 
     steps:
@@ -50,8 +50,8 @@ jobs:
     if: github.repository == 'azuredevcollege/trainingdays'
     runs-on: ubuntu-latest
     env:
-      API_PACKAGE_PATH: "publish/scmcontactsapi"
-      API_PROJECT_PATH: "./day2/apps/dotnetcore/Scm/Adc.Scm.Api"
+      API_PACKAGE_PATH: 'publish/scmcontactsapi'
+      API_PROJECT_PATH: './day2/apps/dotnetcore/Scm/Adc.Scm.Api'
       NEED_DEPLOY: ${{ (github.event_name == 'push') || (github.event_name == 'workflow_dispatch') }}
 
     steps:
@@ -80,7 +80,7 @@ jobs:
         if: env.NEED_DEPLOY == 'true'
         with:
           name: drop
-          path: "${{ env.API_PROJECT_PATH }}/${{ env.API_PACKAGE_PATH }}/${{ env.API_PACKAGE_NAME }}"
+          path: '${{ env.API_PROJECT_PATH }}/${{ env.API_PACKAGE_PATH }}/${{ env.API_PACKAGE_NAME }}'
           if-no-files-found: error
           retention-days: 30
 
